@@ -1,0 +1,131 @@
+.swiper {
+  height: 40rem;
+  width: 100%;
+}
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 70% !important;
+}
+
+.sale__details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  p {
+    font-weight: 500;
+  }
+}
+.swiper-slide img {
+  width: 100%;
+  height: 80%;
+  object-fit: contain;
+}
+
+// -----------------------------------------------------
+
+.categories {
+  margin: 3rem 0;
+}
+.categories__details {
+  border-bottom: 0.1rem solid $blackColor-lighter;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    p {
+      width: 60%;
+      font-size: 2.5rem !important;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+    i {
+      font-size: 2rem;
+      transform: rotate(30deg);
+    }
+  }
+  &[open] summary i {
+    transform: rotate(-30deg);
+  }
+  &-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .center {
+      width: 80%;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column-reverse;
+      margin: 1rem 0;
+      &__left {
+        margin-top: 1rem;
+        p {
+          width: 30rem;
+          font-size: 1.2rem !important;
+          margin: 0.5rem 0 !important;
+        }
+        &-link {
+          display: inline-block;
+          margin-top: 1rem;
+          font-size: 1.6rem;
+          color: $blackColor;
+        }
+      }
+      &__right {
+        display: flex;
+        align-items: flex-start;
+
+        img {
+          width: 12rem;
+          height: 12rem;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 720px) {
+  .sale {
+    padding: 2rem 0;
+  }
+  .swiper-slide {
+    width: 40% !important;
+  }
+  .swiper-slide:nth-child(2n) {
+    width: 40% !important;
+  }
+  .swiper-slide:nth-child(3n) {
+    width: 60% !important;
+    img {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  // -----------------------------
+  .categories__details {
+    &-product {
+      .center {
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__right {
+          img {
+            height: 15rem;
+            width: 15rem;
+          }
+        }
+      }
+    }
+  }
+}

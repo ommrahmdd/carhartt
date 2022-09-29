@@ -1,0 +1,35 @@
+// @font-face {
+//   font-family: "ASpace", serif;
+//   font-style: normal;
+//   font-weight: normal;
+//   src: local("ASpace") url("./../../assets/fonts/ASpace.woff") format("woff");
+// }
+
+html {
+  font-size: 10px;
+}
+p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+ul {
+  list-style: none !important;
+  margin: 0 !important;
+}
+
+body {
+  background-color: $bgColor !important;
+  font-family: "Sora" !important;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+}

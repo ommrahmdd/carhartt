@@ -1,0 +1,130 @@
+.customNav {
+  padding: 0 2rem;
+  &__grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 0.1rem solid $blackColor-lighter;
+  }
+
+  &__left {
+    display: none;
+    ul {
+      list-style: none;
+      display: flex;
+    }
+    &-item {
+      display: block;
+      margin-right: 2rem;
+      font-size: 1.6rem;
+      text-transform: capitalize;
+    }
+    &-link {
+      text-decoration: none;
+      color: $blackColor;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        opacity: 0.5;
+        color: $blackColor;
+      }
+    }
+  }
+
+  &__center {
+    p {
+      font-family: "ASpace";
+      font-size: 3rem;
+    }
+    &-imgBox {
+      width: 7rem !important;
+      height: 7rem !important;
+      cursor: pointer;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+  &__right {
+    ul {
+      display: none;
+    }
+    li {
+      margin-left: 2rem;
+      font-size: 1.6rem;
+    }
+    &-link {
+      text-decoration: none;
+      color: $blackColor;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        opacity: 0.5;
+        color: $blackColor;
+      }
+    }
+  }
+  .bars {
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+}
+
+// STYLE: menu
+.menu {
+  position: fixed;
+  left: 0;
+  top: "-100%";
+  width: 100%;
+  height: 100vh;
+  background-color: $bgColor;
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  ul {
+    list-style: none;
+  }
+  &__item {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: center;
+    &-link {
+      text-decoration: none;
+      color: $blackColor;
+      transition: all 0.3s ease-in;
+      &:hover {
+        opacity: 0.6;
+        color: $blackColor;
+      }
+    }
+  }
+}
+
+// STYLE: media
+@media screen and (min-width: 1024px) {
+  .customNav {
+    &__left {
+      display: block;
+    }
+    &__center {
+      &-imgBox {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+    &__right {
+      ul {
+        display: flex;
+      }
+    }
+    .bars {
+      display: none;
+    }
+  }
+}
