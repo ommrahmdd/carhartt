@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,6 +10,7 @@ import { categories, products } from "./homeUtils";
 import history_1 from "./../../assets/history/1.webp";
 import history_2 from "./../../assets/history/3.jpg";
 import { news } from "./homeUtils";
+import { getHeader } from "../../firebase/homeUi";
 export default function Home() {
   return (
     <main className="homePage">

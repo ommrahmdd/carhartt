@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getHeader } from "../../firebase/homeUi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import header_1 from "./../../assets/header/3-lg.jpg";
 import header_2 from "./../../assets/header/1-lg.jpg";
 export default function Header() {
+  let [headerImg, setHeaderImg] = useState<any>();
+  useEffect(() => {
+    getHeader().then((res) => {
+      setHeaderImg(res);
+    });
+  }, []);
   return (
     <header className="header">
       <div className="container">
@@ -18,16 +27,16 @@ export default function Header() {
             </div>
           </div>
           <div className="header__right">
-            <img
-              src={header_1}
-              alt="header image"
-              className="header__right-1"
-            />
-            <img
-              src={header_2}
-              alt="header image"
-              className="header__right-2"
-            />
+            {headerImg &&
+              headerImg.map((img: any, index: number) => (
+                <LazyLoadImage
+                  src={img.img}
+                  className={` header__right-img${index}`}
+                  key={index}
+                  effect="blur"
+                  placeholderSrc={header_1}
+                />
+              ))}
           </div>
         </div>
       </div>

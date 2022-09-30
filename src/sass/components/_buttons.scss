@@ -1,0 +1,17 @@
+.customBtn {
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 300;
+  transition: all 0.3s ease-in-out;
+}
+
+.primaryBtn {
+  background-color: $yellowColor;
+  color: white;
+}
+
+.primaryBtn:hover {
+  filter: grayscale(1);
+}
