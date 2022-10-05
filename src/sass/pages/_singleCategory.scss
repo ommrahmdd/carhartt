@@ -1,0 +1,55 @@
+.singleCategory {
+  padding: 4rem 0;
+
+  &__content {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    &-right,
+    &-left {
+      min-width: 25rem;
+    }
+    &-left {
+      margin-bottom: 3rem;
+      form {
+        label {
+          display: block;
+        }
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-around;
+      text-transform: capitalize;
+      img {
+        width: 10rem;
+        height: 10rem;
+        object-fit: contain;
+      }
+      i {
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .singleCategory {
+    &__content {
+      &-right {
+        img {
+          width: 30rem;
+          height: 25rem;
+        }
+      }
+    }
+  }
+}

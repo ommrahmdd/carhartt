@@ -4,21 +4,42 @@ import logo from "./../../assets/logo.png";
 import { handleCloseMenu, handleOpenMenu } from "./navUtils";
 export default function Nav() {
   let navigate = useNavigate();
-  let all: string[] = ["men", "women", "lookbook", "Bag"];
-  let left: string[] = ["men", "women", "lookbook"];
+  let all: string[] = ["men", "Kids", "lookbook", "Bag"];
+  let left: string[] = ["men", "Kids", "lookbook"];
   return (
     <nav className="customNav">
       <div className="container">
         <div className="customNav__grid">
           <div className="customNav__left">
             <ul>
-              {left.map((item, index) => (
+              {/* {left.map((item, index) => (
                 <li className="customNav__left-item" key={index}>
                   <Link to={`/${item}`} className="customNav__left-link">
                     {item}
                   </Link>
                 </li>
-              ))}
+              ))} */}
+              <li className="customNav__left-item">
+                <Link
+                  to={`/category?category=men`}
+                  className="customNav__left-link"
+                >
+                  Men
+                </Link>
+              </li>
+              <li className="customNav__left-item">
+                <Link
+                  to={`/category?category=kids`}
+                  className="customNav__left-link"
+                >
+                  Kids
+                </Link>
+              </li>
+              <li className="customNav__left-item">
+                <Link to={`/lookbook`} className="customNav__left-link">
+                  Lookbook
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="customNav__center">

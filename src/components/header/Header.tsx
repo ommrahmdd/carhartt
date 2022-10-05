@@ -21,7 +21,7 @@ export default function Header() {
                 <div className="">Work In</div>
                 <div className="">Progress</div>
               </h1>
-              <a href="/">
+              <a href="/category?category=all">
                 Shop Now <i className="fa-solid fa-arrow-right-long"></i>{" "}
               </a>
             </div>

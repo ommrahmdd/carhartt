@@ -10,8 +10,25 @@ import { categories, products } from "./homeUtils";
 import history_1 from "./../../assets/history/1.webp";
 import history_2 from "./../../assets/history/3.jpg";
 import { news } from "./homeUtils";
-import { getHeader } from "../../firebase/homeUi";
+import { getAllCategory, getHeader } from "../../firebase/homeUi";
 export default function Home() {
+  type ICategory = {
+    data: {
+      name: string;
+      text: string;
+      path: string;
+    };
+    img1: string;
+    img2: string;
+    _id: string;
+  };
+  let [category, setCategories] = useState<ICategory[]>();
+  useEffect(() => {
+    getAllCategory().then((data: any) => {
+      console.log(data);
+      setCategories(data);
+    });
+  }, []);
   return (
     <main className="homePage">
       <Header />
@@ -35,31 +52,36 @@ export default function Home() {
         {/* STYLE: category */}
         <Title title="Categories" />
         <section className="categories">
-          {categories.map((cat, index) => (
-            <details className="categories__details" key={index}>
-              <summary>
-                <span>0{index + 1}</span>
-                <p>{cat.title}</p>
-                <i className="fa-solid fa-arrow-right"></i>
-              </summary>
-              <div className="categories__details-product">
-                <div className="left"></div>
-                <div className="center">
-                  <div className="center__left">
-                    <p>{cat.text}</p>
-                    <Link to={`/${cat.to}`} className="center__left-link">
-                      See More <i className="fa-solid fa-arrow-right-long"></i>
-                    </Link>
-                  </div>
-                  <div className="center__right">
-                    {cat.imgs.map((img, key) => (
-                      <img src={img} alt="category image" key={key} />
-                    ))}
+          {category &&
+            category.map((cat: any, index: number) => (
+              <details className="categories__details" key={index}>
+                <summary>
+                  <span>0{index + 1}</span>
+                  <p>{cat.data.name}</p>
+                  <i className="fa-solid fa-arrow-right"></i>
+                </summary>
+                <div className="categories__details-product">
+                  <div className="left"></div>
+                  <div className="center">
+                    <div className="center__left">
+                      <p>{cat.data.text}</p>
+                      <Link
+                        to={`/${cat.data.path}`}
+                        className="center__left-link"
+                      >
+                        See More{" "}
+                        <i className="fa-solid fa-arrow-right-long"></i>
+                      </Link>
+                    </div>
+                    <div className="center__right">
+                      {[cat.img1, cat.img2].map((img: string, key: number) => (
+                        <img src={img} alt="category image" key={key} />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </details>
-          ))}
+              </details>
+            ))}
         </section>
         {/* STYLE: men and kids */}
         <section className="menKids">

@@ -1,0 +1,77 @@
+.addProduct {
+  padding: 3rem 0;
+
+  &__content {
+    form {
+      label {
+        display: block;
+        width: 5rem;
+      }
+      input,
+      textarea {
+        min-width: 24rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.4rem;
+      }
+
+      .sizes {
+        width: 25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &__sizeBox {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+
+          cursor: pointer;
+          opacity: 0.5;
+          margin-bottom: 1rem;
+          p {
+            font-size: 1.3rem !important;
+            text-transform: uppercase;
+          }
+          i {
+            font-size: 1.3rem;
+          }
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+      .colors {
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          margin-bottom: 1rem;
+
+          input {
+            min-width: 5rem !important;
+          }
+        }
+        button {
+          scale: 0.7;
+        }
+      }
+      .images {
+        &__imgBox {
+          width: 25rem !important;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+        }
+        button {
+          scale: 0.7;
+        }
+        input {
+          scale: 0.7;
+        }
+      }
+    }
+  }
+}
+.activeSize {
+  opacity: 1 !important;
+}
