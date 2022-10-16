@@ -5,6 +5,7 @@ export interface IProduct {
   category: string;
   price: number;
   discount: number;
+  quantity: number;
   colors: string[];
   size: string[];
   images: any[];

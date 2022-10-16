@@ -20,6 +20,7 @@ ul {
 body {
   background-color: $bgColor !important;
   font-family: "Sora" !important;
+  overflow-x: hidden;
 }
 
 @media screen and (min-width: 768px) {

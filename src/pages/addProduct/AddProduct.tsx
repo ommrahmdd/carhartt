@@ -14,6 +14,7 @@ export default function AddProduct() {
     category: "",
     price: 0,
     discount: 0,
+    quantity: 0,
     colors: [],
     size: [],
     images: [],
@@ -152,6 +153,17 @@ export default function AddProduct() {
                 name="price"
                 min={1}
                 value={product.price}
+                onChange={(e) => handleTextChange(e)}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="quantity">Quantity</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min={1}
+                value={product.quantity}
                 onChange={(e) => handleTextChange(e)}
               />
             </div>

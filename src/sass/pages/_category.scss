@@ -9,18 +9,23 @@
     &__product {
       cursor: pointer;
       transition: all 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       &:hover {
         transform: skew(2deg);
       }
-      img {
+      img,
+      &-img {
         background-color: $greyColor;
         width: 15rem;
-        height: 15rem;
+        height: 19rem;
         object-fit: contain;
         margin-bottom: 0.7rem;
         padding: 1rem;
       }
       &-namePrice {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -28,6 +33,9 @@
         span {
           font-size: 1.3rem;
           font-weight: 600;
+          &:first-of-type {
+            width: 50%;
+          }
         }
       }
     }
@@ -44,7 +52,8 @@
   .categoryPage {
     .products {
       grid-template-columns: repeat(6, 1fr);
-      img {
+      img,
+      &__product-img {
         width: 30rem;
         height: 25rem;
       }
@@ -52,8 +61,10 @@
       &__product {
         grid-column: span 2;
       }
-      &__product:nth-of-type(4n),
-      &__product:nth-of-type(5n) {
+      &__product:nth-of-type(4),
+      &__product:nth-of-type(5),
+      &__product:nth-of-type(9),
+      &__product:nth-of-type(10) {
         grid-column: span 3;
         img {
           width: 40rem;

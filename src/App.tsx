@@ -12,11 +12,14 @@ const SingleCategory = lazy(
 );
 const Category = lazy(() => import("./pages/category/Category"));
 const AddProduct = lazy(() => import("./pages/addProduct/AddProduct"));
+const SingleProduct = lazy(() => import("./pages/SingleProduct/SingleProduct"));
+const Lookbook = lazy(() => import("./pages/lookbook/Lookbook"));
 
 // HINT:
 // /home-ui for modify the home content like header and category
 // /addProduct for add new product
 // -------------------------------
+
 function App() {
   return (
     <Suspense fallback={<div>loading</div>}>
@@ -28,9 +31,13 @@ function App() {
           <Route path="/men" element={<Men />} />
           <Route path="/women" element={<Women />} />
           <Route path="/home-ui" element={<HomeUI />} />
-          <Route path="/category/:catID" element={<SingleCategory />} />
-          <Route path="/category" element={<Category />} />
+          <Route path="/category">
+            <Route index element={<Category />} />
+            <Route path=":catID" element={<SingleCategory />} />
+            <Route path="product/:prodID" element={<SingleProduct />} />
+          </Route>
           <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/lookbook" element={<Lookbook />} />
           <Route path="*" element={<div>Error</div>} />
         </Routes>
       </Router>

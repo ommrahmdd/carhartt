@@ -21,7 +21,7 @@ export default function Nav() {
               ))} */}
               <li className="customNav__left-item">
                 <Link
-                  to={`/category?category=men`}
+                  to={`/category?type=men`}
                   className="customNav__left-link"
                 >
                   Men
@@ -29,7 +29,7 @@ export default function Nav() {
               </li>
               <li className="customNav__left-item">
                 <Link
-                  to={`/category?category=kids`}
+                  to={`/category?type=kids`}
                   className="customNav__left-link"
                 >
                   Kids

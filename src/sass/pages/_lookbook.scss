@@ -1,0 +1,88 @@
+.lookbook {
+  min-height: 90vh;
+  padding: 8rem 0;
+
+  &__content {
+    .header {
+      position: relative;
+      width: 100%;
+      &__title {
+        position: absolute;
+        font-size: 4rem !important;
+        font-weight: 800;
+        text-transform: uppercase;
+        left: 5%;
+        top: -5%;
+        z-index: 2;
+      }
+      &__imgs {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+        margin-top: 2rem;
+        &-1,
+        &-2 {
+          object-fit: contain;
+          background-color: $greyColor;
+        }
+        &-1 {
+          height: 30rem;
+          width: 15rem;
+        }
+        &-txt {
+          display: none;
+        }
+        &-2 {
+          height: 30rem;
+          width: 15rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .lookbook {
+    &__content {
+      .header {
+        &__title {
+          font-size: 5rem !important;
+        }
+        &__imgs {
+          &-1,
+          &-2 {
+            width: 30rem;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .lookbook {
+    &__content {
+      .header {
+        &__title {
+          font-size: 7rem !important;
+          left: 25%;
+          line-height: 1;
+        }
+
+        &__imgs {
+          justify-content: space-between;
+          &-txt {
+            display: block;
+            width: 30rem;
+          }
+          &-1 {
+            height: 50rem;
+            width: 40rem;
+          }
+          &-2 {
+            height: 25rem;
+          }
+        }
+      }
+    }
+  }
+}
