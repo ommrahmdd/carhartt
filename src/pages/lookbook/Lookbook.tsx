@@ -55,6 +55,12 @@ export default function Lookbook() {
     );
   };
 
+  // HANDLE: Route Category Click
+  let handleCaTegoryClick = () => {
+    navigate(`/category?season=${lookbook.season}&year=${lookbook.year}`, {
+      replace: true,
+    });
+  };
   return (
     <main className="lookbook">
       {products && (
@@ -115,61 +121,13 @@ export default function Lookbook() {
             {/* ---------------------------- START STYLE: Section 1 */}
             <section className="sectionOne">
               {productImgHTML(4, "sectionOne__imgBox", "1")}
-              {/* <div className="lookbook-imgBox sectionOne__imgBox">
-                
-                <LazyLoadImage
-                  src={products[4]?.images[0]}
-                  className="sectionOne__imgBox-img-1 "
-                  alt="product image"
-                  effect="opacity"
-                />
-                <div className="overlay">
-                  <button
-                    className="customBtn linkBtn"
-                    onClick={() => handleProductClick(products![4]._id!)}
-                  >
-                    View <span>&rsaquo;</span>
-                  </button>
-                </div>
-              </div> */}
             </section>
             {/* ---------------------------- END STYLE Section 1 */}
             {/* ---------------------------- START STYLE: Section 2 */}
             <section className="sectionTwo">
               {productImgHTML(5, "sectionTwo__imgBox", "1")}
               {productImgHTML(6, "sectionTwo__imgBox", "2")}
-              {/* <div className="sectionTwo__imgBox lookbook-imgBox">
-                <LazyLoadImage
-                  src={products[5].images[0]}
-                  className="sectionTwo__imgBox-1"
-                  alt="product image"
-                  effect="blur"
-                />
-                <div className="overlay">
-                  <button
-                    className="customBtn linkBtn"
-                    onClick={() => handleProductClick(products![5]._id!)}
-                  >
-                    View <span>&rsaquo;</span>
-                  </button>
-                </div>
-              </div>
-              <div className="sectionTwo__imgBox lookbook-imgBox">
-                <LazyLoadImage
-                  src={products[6].images[0]}
-                  className="sectionTwo__imgBox-2"
-                  alt="product image"
-                  effect="blur"
-                />
-                <div className="overlay">
-                  <button
-                    className="customBtn linkBtn"
-                    onClick={() => handleProductClick(products![6]._id!)}
-                  >
-                    View <span>&rsaquo;</span>
-                  </button>
-                </div>
-              </div> */}
+
               <p className="sectionTwo__txt">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Inventore odio iusto totam expedita omnis hic temporibus
@@ -179,38 +137,6 @@ export default function Lookbook() {
             {/* ---------------------------- END STYLE Section 2 */}
             {/* ---------------------------- START STYLE: Section 3 */}
             <section className="sectionThree">
-              {/* <div className="sectionThree__imgBox lookbook-imgBox">
-                <LazyLoadImage
-                  src={products[7].images[0]}
-                  className="sectionThree__imgBox-1"
-                  alt="product image"
-                  effect="blur"
-                />
-                <div className="overlay">
-                  <button
-                    className="customBtn linkBtn"
-                    onClick={() => handleProductClick(products![7]._id!)}
-                  >
-                    View <span>&rsaquo;</span>
-                  </button>
-                </div>
-              </div>
-              <div className="sectionThree__imgBox lookbook-imgBox">
-                <LazyLoadImage
-                  src={products[8].images[0]}
-                  className="sectionThree__imgBox-2"
-                  alt="product image"
-                  effect="blur"
-                />
-                <div className="overlay">
-                  <button
-                    className="customBtn linkBtn"
-                    onClick={() => handleProductClick(products![8]._id!)}
-                  >
-                    View <span>&rsaquo;</span>
-                  </button>
-                </div>
-              </div> */}
               {productImgHTML(7, "sectionThree__imgBox", "1")}
               {productImgHTML(8, "sectionThree__imgBox", "2")}
             </section>
@@ -221,11 +147,26 @@ export default function Lookbook() {
               {productImgHTML(9, "sectionFour__imgBox", "2")}
               {productImgHTML(8, "sectionFour__imgBox", "3")}
             </section>
+            {/* ---------------------------- END STYLE Section 4 */}
+            {/* ---------------------------- START STYLE: Section 5 */}
             <section className="sectionFive">
               {productImgHTML(1, "sectionFive__imgBox", "1")}
-              <div className="sectionFive__txt">text</div>
+              <div className="sectionFive__txt">
+                <button
+                  className="sectionFive__txt-btn"
+                  onClick={() => handleCaTegoryClick()}
+                >
+                  Go To Category <span>&rarr;</span>
+                </button>
+                <button
+                  className="sectionFive__txt-btn"
+                  onClick={() => navigate("/")}
+                >
+                  Back To Main Page<span>&rarr;</span>
+                </button>
+              </div>
             </section>
-            {/* ---------------------------- END STYLE Section 4 */}
+            {/* ---------------------------- END STYLE Section 5 */}
           </div>
         </div>
       )}

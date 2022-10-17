@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import { getAllProducts, getProductByType } from "../../firebase/products";
+import {
+  getAllProducts,
+  getProductBySeasonAndYear,
+  getProductByType,
+} from "../../firebase/products";
 import { currencyFormat } from "../../components/formatMoney";
 import "react-lazy-load-image-component/src/effects/blur.css";
 export default function Category() {
@@ -19,8 +23,19 @@ export default function Category() {
       getProductByType(querySerach.get("type")!).then((data) => {
         setProducts(data);
       });
+    } else if (querySerach.get("season")) {
+      getProductBySeasonAndYear(
+        querySerach.get("season")!,
+        querySerach.get("year")!
+      ).then((data) => {
+        setProducts(data);
+      });
     }
-  }, [querySerach.get("category"), querySerach.get("type")]);
+  }, [
+    querySerach.get("category"),
+    querySerach.get("type"),
+    querySerach.get("season"),
+  ]);
 
   let handleProductClick = (_id: string) => {
     navigate(`/category/product/${_id}`);

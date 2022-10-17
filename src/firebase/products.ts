@@ -61,6 +61,7 @@ export let getProductByCategory = async (category: string, _slice: number) => {
   return products.slice(0, _slice);
 };
 
+// HANDLE: filter products by type
 export let getProductByType = async (queryType: string) => {
   let q = query(productCollection, where("type", "==", queryType));
   let snapShot = await getDocs(q);
@@ -71,4 +72,18 @@ export let getProductByType = async (queryType: string) => {
     };
   });
   return product;
+};
+
+// HANDLE: filter products by season and year
+export let getProductBySeasonAndYear = async (season: string, year: string) => {
+  let q = query(
+    productCollection,
+    where("season", "==", season),
+    where("year", "==", year)
+  );
+  let snapShot = await getDocs(q);
+  return snapShot.docs.map((product) => ({
+    ...product.data(),
+    _id: product.id,
+  }));
 };

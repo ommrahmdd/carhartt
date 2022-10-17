@@ -135,16 +135,40 @@
       align-items: flex-end;
 
       &__imgBox {
-        width: 50rem;
+        width: 30rem;
         height: 35rem;
         &-1 {
-          width: 50rem;
+          width: 30rem;
           height: 35rem;
           object-fit: contain;
         }
       }
       &__txt {
-        width: auto;
+        margin-top: 2rem;
+        width: 100%;
+
+        &-btn {
+          background-color: transparent;
+          border: none;
+          font-size: 2rem;
+          border-bottom: 0.1rem solid black;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          transition: all 0.3s ease-in-out;
+          text-transform: uppercase;
+          span {
+            font-weight: 900;
+            font-size: 2rem;
+          }
+
+          &:first-of-type {
+            margin-bottom: 2rem;
+          }
+          &:hover {
+            opacity: 0.5;
+          }
+        }
       }
     }
   }
@@ -297,6 +321,17 @@
             width: 25rem;
             height: 25rem;
           }
+        }
+      }
+      .sectionFive {
+        &__imgBox {
+          width: 50rem;
+          &-1 {
+            width: 50rem;
+          }
+        }
+        &__txt {
+          width: 50%;
         }
       }
     }
