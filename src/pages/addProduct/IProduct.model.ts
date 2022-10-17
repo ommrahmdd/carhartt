@@ -12,4 +12,5 @@ export interface IProduct {
   description: string;
   shipping: string;
   returns: string;
+  _id?: string;
 }

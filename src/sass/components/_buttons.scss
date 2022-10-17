@@ -22,3 +22,26 @@
 .sBtn:hover {
   filter: grayscale(1);
 }
+.linkBtn {
+  border-radius: 0;
+  background-color: transparent;
+  border-bottom: 0.1rem solid black;
+  padding: 0;
+  font-size: 2rem;
+  transition: all 0.2s ease-in-out;
+  span {
+    display: inline-block;
+    font-size: 2.5rem;
+    margin-left: 1rem;
+  }
+  &:hover {
+    opacity: 0.4;
+    transform: skew(-3deg);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .linkBtn {
+    font-size: 3rem;
+  }
+}

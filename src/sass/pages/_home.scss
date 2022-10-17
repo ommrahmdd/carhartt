@@ -62,7 +62,7 @@
     justify-content: space-between;
 
     .center {
-      width: 80%;
+      width: 100%;
       display: flex;
       align-items: flex-start;
       flex-direction: column-reverse;
@@ -246,7 +246,7 @@
       .center {
         flex-direction: row;
         justify-content: space-between;
-
+        width: 80%;
         &__right {
           img {
             height: 15rem;
