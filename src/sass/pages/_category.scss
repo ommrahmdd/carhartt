@@ -40,6 +40,31 @@
       }
     }
   }
+  .loadMore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  .primaryBtn {
+    padding: 0.8rem 2rem;
+    font-size: 1.3rem !important;
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+    color: black;
+    border: 0.1rem solid black;
+    span {
+      display: flex;
+      align-items: center;
+      display: inline-block;
+      font-size: 1.3rem !important;
+      margin-right: 1rem;
+      transform: rotate(90deg);
+    }
+    &:hover {
+      transform: translateY(-0.5rem);
+    }
+  }
 }
 @media screen and (min-width: 720px) {
   .categoryPage {
