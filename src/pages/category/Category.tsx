@@ -82,9 +82,16 @@ export default function Category() {
               products.map((product: any, index: number) => (
                 <div
                   className="products__product"
-                  key={index}
+                  key={product._id}
                   onClick={() => handleProductClick(product._id)}
                 >
+                  {Number(product.discount) > 0 ? (
+                    <div className="products__product-discount">
+                      -{product.discount}%
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <LazyLoadImage
                     src={product.images[0]}
                     alt="product image"
@@ -95,7 +102,18 @@ export default function Category() {
                     <span>
                       {product.name.split(" ").slice(0, 4).join(" ")}...
                     </span>
-                    <span>{currencyFormat(Number(product.price))}</span>
+                    {product.discount > 0 ? (
+                      <span>
+                        {currencyFormat(
+                          Number(
+                            product.price -
+                              (product.discount * product.price) / 100
+                          )
+                        )}
+                      </span>
+                    ) : (
+                      <span>{currencyFormat(Number(product.price))}</span>
+                    )}
                   </div>
                 </div>
               ))
@@ -104,6 +122,7 @@ export default function Category() {
             )}
           </div>
 
+          {/* STYLE: Load More button */}
           {products.length > 0 && (
             <div className="loadMore">
               {IS_FINISHED == false && (

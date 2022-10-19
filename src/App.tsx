@@ -13,6 +13,9 @@ const Category = lazy(() => import("./pages/category/Category"));
 const AddProduct = lazy(() => import("./pages/addProduct/AddProduct"));
 const SingleProduct = lazy(() => import("./pages/SingleProduct/SingleProduct"));
 const Lookbook = lazy(() => import("./pages/lookbook/Lookbook"));
+const DashboardSidebar = lazy(
+  () => import("./components/dashboardSidebar/DashboardSidebar")
+);
 
 // HINT:
 // /home-ui for modify the home content like header and category
@@ -27,13 +30,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/home-ui" element={<HomeUI />} />
           <Route path="/category">
             <Route index element={<Category />} />
             <Route path=":catID" element={<SingleCategory />} />
             <Route path="product/:prodID" element={<SingleProduct />} />
           </Route>
-          <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/dashboard" element={<DashboardSidebar />}>
+            <Route index element={<AddProduct />} />
+            <Route path="home-ui" element={<HomeUI />} />
+          </Route>
           <Route path="/lookbook" element={<Lookbook />} />
           <Route path="*" element={<div>Error</div>} />
         </Routes>

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Title from "../../components/Title";
 import men from "./../../assets/menKids/men.jpg";
 import kids from "./../../assets/menKids/kids.jpg";
-import { categories, products } from "./homeUtils";
 import history_1 from "./../../assets/history/1.webp";
 import history_2 from "./../../assets/history/3.jpg";
 import { news } from "./homeUtils";
 import { getAllCategory, getHeader } from "../../firebase/homeUi";
+import { getSalesProducts } from "../../firebase/products";
+import { currencyFormat } from "../../components/formatMoney";
+import "swiper/css";
+
 export default function Home() {
   type ICategory = {
     data: {
@@ -22,30 +25,52 @@ export default function Home() {
     img2: string;
     _id: string;
   };
+  let navigate = useNavigate();
   let [category, setCategories] = useState<ICategory[]>();
+  let [salesProducts, setSalesProducts] = useState<any>();
+
   useEffect(() => {
     getAllCategory().then((data: any) => {
-      console.log(data);
       setCategories(data);
+    });
+    getSalesProducts().then((data) => {
+      console.log(data);
+      setSalesProducts(data);
     });
   }, []);
   return (
     <main className="homePage">
       <Header />
-      {/* STYLE: sale */}
       <div className="container">
         <Title title="Sale" to="sale" />
+        {/* STYLE: sale */}
         <section className="sale">
           <Swiper slidesPerView={"auto"} spaceBetween={30}>
-            {products.map((product, key) => (
-              <SwiperSlide key={key}>
-                <img src={product.img} alt="image" />
-                <div className="sale__details">
-                  <p>Title</p>
-                  <p className="sale__price">{product.price}$</p>
-                </div>
-              </SwiperSlide>
-            ))}
+            {salesProducts &&
+              salesProducts.map((product: any, key: number) => (
+                <SwiperSlide
+                  key={key}
+                  onClick={() => {
+                    navigate(`/category/product/${product._id}`, {
+                      replace: true,
+                    });
+                  }}
+                >
+                  <span className="sale__discount">-{product.discount}%</span>
+                  <img src={product.images[0]} alt="image" />
+                  <div className="sale__details">
+                    <p>{product.name.split(" ").slice(0, 5).join(" ")}...</p>
+                    <p className="sale__price">
+                      {currencyFormat(
+                        Number(
+                          product.price -
+                            (product.discount * product.price) / 100
+                        )
+                      )}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </section>
 

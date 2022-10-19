@@ -12,10 +12,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      &:hover {
-        transform: skew(2deg);
+      position: relative;
+      &-discount {
+        @include discount;
       }
-      img,
+
       &-img {
         background-color: $greyColor;
         width: 15rem;
@@ -38,6 +39,9 @@
           }
         }
       }
+      &:hover {
+        transform: skew(2.5deg);
+      }
     }
   }
   .loadMore {
@@ -53,6 +57,7 @@
     background-color: transparent;
     color: black;
     border: 0.1rem solid black;
+    animation: moveTopDown 1.9s linear infinite;
     span {
       display: flex;
       align-items: center;
@@ -62,8 +67,18 @@
       transform: rotate(90deg);
     }
     &:hover {
-      transform: translateY(-0.5rem);
+      animation: none;
     }
+  }
+}
+
+@keyframes moveTopDown {
+  50% {
+    transform: translateY(-0.5rem);
+    // box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.296);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 @media screen and (min-width: 720px) {

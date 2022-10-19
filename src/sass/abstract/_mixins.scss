@@ -1,0 +1,14 @@
+@mixin discount {
+  position: absolute;
+  background-color: $orangeColor-dark;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border-top-left-radius: 2rem;
+  text-align: center;
+  color: white;
+  right: 10%;
+  top: 0%;
+  font-size: 1.5rem !important;
+  font-weight: 300;
+  z-index: 5;
+}

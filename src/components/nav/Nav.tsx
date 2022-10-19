@@ -4,7 +4,25 @@ import logo from "./../../assets/logo.png";
 import { handleCloseMenu, handleOpenMenu } from "./navUtils";
 export default function Nav() {
   let navigate = useNavigate();
-  let all: string[] = ["men", "Kids", "lookbook", "Bag"];
+  // let all: string[] = ["men", "Kids", "lookbook", "Bag"];
+  let all: any[] = [
+    {
+      route: "Men",
+      to: "/category?type=men",
+    },
+    {
+      route: "Kids",
+      to: "/category?type=kids",
+    },
+    {
+      route: "Lookbook",
+      to: "/lookbook",
+    },
+    {
+      route: "Bag",
+      to: "/bag",
+    },
+  ];
   let left: string[] = ["men", "Kids", "lookbook"];
   return (
     <nav className="customNav">
@@ -80,8 +98,8 @@ export default function Nav() {
           <ul>
             {all.map((item, index) => (
               <li className="menu__item" key={index}>
-                <Link to={`/${item}`} className="menu__item-link">
-                  {item}
+                <Link to={`${item.to}`} className="menu__item-link">
+                  {item.route}
                 </Link>
               </li>
             ))}

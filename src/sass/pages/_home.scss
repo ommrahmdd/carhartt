@@ -1,28 +1,51 @@
-.swiper {
-  height: 40rem;
-  width: 100%;
-}
-.swiper-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 70% !important;
-}
-
-.sale__details {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 1rem;
-  p {
-    font-weight: 500;
+.sale {
+  margin: 5rem 0;
+  .swiper {
+    height: 40rem;
+    width: 100%;
   }
-}
-.swiper-slide img {
-  width: 100%;
-  height: 80%;
-  object-fit: contain;
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70% !important;
+    position: relative !important;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      transform: skew(-2.5deg);
+    }
+  }
+  .swiper-slide img {
+    width: 100%;
+    height: 80%;
+    object-fit: contain;
+    padding: 2rem;
+  }
+  &__details {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 1rem;
+    p {
+      font-weight: 500;
+
+      &:first-of-type {
+        width: 80%;
+      }
+      &:nth-of-type(2) {
+        background-color: $greyColor;
+        padding: 1rem !important;
+        color: $orangeColor-dark;
+        font-size: 1.2rem !important;
+      }
+    }
+  }
+
+  &__discount {
+    @include discount;
+  }
 }
 
 // -----------------------------------------------------
@@ -225,18 +248,18 @@
 @media screen and (min-width: 720px) {
   .sale {
     padding: 2rem 0;
-  }
-  .swiper-slide {
-    width: 40% !important;
-  }
-  .swiper-slide:nth-child(2n) {
-    width: 40% !important;
-  }
-  .swiper-slide:nth-child(3n) {
-    width: 60% !important;
-    img {
-      object-fit: cover;
-      object-position: center;
+    .swiper-slide {
+      width: 40% !important;
+    }
+    .swiper-slide:nth-child(2n) {
+      width: 40% !important;
+    }
+    .swiper-slide:nth-child(3n) {
+      width: 60% !important;
+      img {
+        object-fit: contain;
+        object-position: center;
+      }
     }
   }
 

@@ -3,6 +3,9 @@
 @import "./sass/base/typography";
 @import "./sass/base/utils";
 
+// STYLE: Mixins
+@import "./sass/abstract/mixins";
+
 // STYLE: components
 @import "./sass/components/buttons";
 @import "./sass/components/loading";

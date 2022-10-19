@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProductByCategory, getProductById } from "../../firebase/products";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -8,8 +8,10 @@ import { currencyFormat } from "../../components/formatMoney";
 import Title from "../../components/Title";
 export default function SingleProduct() {
   let params = useParams();
+  let navigate = useNavigate();
   let [product, setProduct] = useState<any>();
   let [suggest, setSuggest] = useState<any>();
+
   useEffect(() => {
     getProductById(params.prodID!)
       .then((data: any) => {
@@ -20,7 +22,7 @@ export default function SingleProduct() {
         console.log(res);
         setSuggest(res);
       });
-  }, []);
+  }, [params]);
   return (
     <div className="singleProduct">
       <div className="container">
@@ -124,7 +126,16 @@ export default function SingleProduct() {
           {suggest &&
             suggest.map((product: any, index: number) => (
               <div className="suggest__product" key={index}>
-                <img src={product.images[0]} alt="product image" />
+                <img
+                  src={product.images[0]}
+                  alt="product image"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    navigate(`/category/product/${product._id}`, {
+                      replace: true,
+                    });
+                  }}
+                />
               </div>
             ))}
         </div>

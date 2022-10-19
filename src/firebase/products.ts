@@ -38,17 +38,9 @@ export let addProductImgs = async (id: string, img: string) => {
   });
 };
 
-let lastDoc;
 // HANDLE: get all products
 export let getAllProducts = async (last_product_id: string = "0") => {
   // let size = (await getDocs(productCollection)).size;
-  //----------- First get first 10 Products by default
-
-  // ------------- START FIXME:
-  // let firstQ = query(productCollection, orderBy("name"), limit(PAGE_SIZE));
-  // let first = await getDocs(firstQ);
-  // let lastProduct = first.docs[first.docs.length - 1];
-  // ------------- END FIXME:
 
   // ----------- second get next products depend on last product
   let lastDocRef = doc(db, "products", last_product_id);
@@ -163,6 +155,15 @@ export let getProductBySeasonAndYear = async (
   }
   let snapShot = await getDocs(q);
   return snapShot.docs.map((product) => ({
+    ...product.data(),
+    _id: product.id,
+  }));
+};
+
+export let getSalesProducts = async () => {
+  let q = query(productCollection, where("discount", ">", "0"), limit(8));
+  let snapShots = await getDocs(q);
+  return snapShots.docs.map((product) => ({
     ...product.data(),
     _id: product.id,
   }));

@@ -3,14 +3,19 @@ import { getHeader } from "../../firebase/homeUi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import header_1 from "./../../assets/header/3-lg.jpg";
-import header_2 from "./../../assets/header/1-lg.jpg";
+import logo from "./../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 export default function Header() {
   let [headerImg, setHeaderImg] = useState<any>();
+  let navigate = useNavigate();
   useEffect(() => {
     getHeader().then((res) => {
       setHeaderImg(res);
     });
   }, []);
+  let handleShopNowBtn = () => {
+    navigate(`/category?category=all`);
+  };
   return (
     <header className="header">
       <div className="container">
@@ -21,9 +26,12 @@ export default function Header() {
                 <div className="">Work In</div>
                 <div className="">Progress</div>
               </h1>
-              <a href="/category?category=all">
+              <button
+                className="customBtn primaryBtn"
+                onClick={handleShopNowBtn}
+              >
                 Shop Now <i className="fa-solid fa-arrow-right-long"></i>{" "}
-              </a>
+              </button>
             </div>
           </div>
           <div className="header__right">
@@ -34,7 +42,7 @@ export default function Header() {
                   className={` header__right-img${index}`}
                   key={index}
                   effect="blur"
-                  placeholderSrc={header_1}
+                  placeholderSrc={logo}
                 />
               ))}
           </div>
