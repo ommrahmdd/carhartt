@@ -16,6 +16,7 @@ const Lookbook = lazy(() => import("./pages/lookbook/Lookbook"));
 const DashboardSidebar = lazy(
   () => import("./components/dashboardSidebar/DashboardSidebar")
 );
+const EditLookbook = lazy(() => import("./pages/editLookbook/EditLookbook"));
 
 // HINT:
 // /home-ui for modify the home content like header and category
@@ -38,6 +39,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardSidebar />}>
             <Route index element={<AddProduct />} />
             <Route path="home-ui" element={<HomeUI />} />
+            <Route path="editLookbook" element={<EditLookbook />} />
           </Route>
           <Route path="/lookbook" element={<Lookbook />} />
           <Route path="*" element={<div>Error</div>} />

@@ -42,7 +42,7 @@ export default function Home() {
     <main className="homePage">
       <Header />
       <div className="container">
-        <Title title="Sale" to="sale" />
+        <Title title="Sale" to="category?sale=discount" />
         {/* STYLE: sale */}
         <section className="sale">
           <Swiper slidesPerView={"auto"} spaceBetween={30}>

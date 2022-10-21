@@ -23,27 +23,28 @@
         font-weight: 600;
         margin-bottom: 1rem;
       }
-      a:link,
-      a:visited {
-        display: inline-block;
-        text-decoration: none;
-        border-bottom: 0.1rem solid black;
-        color: $blackColor;
-        font-size: 1.4rem;
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
-      }
-      a:active,
-      a:hover {
-        opacity: 0.6;
-      }
+
+      // a:link,
+      // a:visited {
+      //   display: inline-block;
+      //   text-decoration: none;
+      //   border-bottom: 0.1rem solid black;
+      //   color: $blackColor;
+      //   font-size: 1.4rem;
+      //   transition: all 0.3s ease-in-out;
+      //   cursor: pointer;
+      // }
+      // a:active,
+      // a:hover {
+      //   opacity: 0.6;
+      // }
     }
   }
 
   &__right {
     display: flex;
     flex-wrap: wrap;
-
+    margin-top: 2rem;
     &-img0 {
       width: 30rem;
       height: 30rem;

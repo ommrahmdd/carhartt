@@ -6,9 +6,15 @@
   border-top-left-radius: 2rem;
   text-align: center;
   color: white;
-  right: 10%;
+  right: 8%;
   top: 0%;
   font-size: 1.5rem !important;
   font-weight: 300;
   z-index: 5;
+}
+
+@mixin centerElements {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

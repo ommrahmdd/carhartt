@@ -4,23 +4,24 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import {
   getAllProducts,
+  getProductByDiscount,
   getProductBySeasonAndYear,
   getProductByType,
 } from "../../firebase/products";
 import { currencyFormat } from "../../components/formatMoney";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Loading from "../../components/loading/Loading";
+import Products from "../../components/products/Products";
 export default function Category() {
   let location = useLocation();
   let navigate = useNavigate();
   let [products, setProducts] = useState<any>([]);
   let [IS_FINISHED, setFINISHED] = useState<boolean>(false);
   let querySerach = new URLSearchParams(location.search);
-  let pageNumber: number = 1;
+
   useEffect(() => {
     if (querySerach.get("category")) {
       getAllProducts().then((data) => {
-        console.log(data);
         setProducts(data);
       });
     } else if (querySerach.get("type")) {
@@ -34,6 +35,10 @@ export default function Category() {
       ).then((data) => {
         setProducts(data);
       });
+    } else if (querySerach.get("sale")) {
+      getProductByDiscount().then((data) => {
+        setProducts(data);
+      });
     }
 
     setFINISHED(false);
@@ -41,11 +46,8 @@ export default function Category() {
     querySerach.get("category"),
     querySerach.get("type"),
     querySerach.get("season"),
+    querySerach.get("sale"),
   ]);
-  // HANDLE: product click
-  let handleProductClick = (_id: string) => {
-    navigate(`/category/product/${_id}`);
-  };
 
   // HANDLE: Load more button
   let handleLoadMoreBtn = (lastProduct: string) => {
@@ -68,6 +70,11 @@ export default function Category() {
         if (data.length == 0) setFINISHED(true);
         else setProducts((prevState: any) => [...prevState, ...data]);
       });
+    } else if (querySerach.get("sale")) {
+      getProductByDiscount(lastProduct).then((data) => {
+        if (data.length == 0) setFINISHED(true);
+        else setProducts((prevState: any) => [...prevState, ...data]);
+      });
     }
   };
 
@@ -77,7 +84,7 @@ export default function Category() {
         <div className="categoryPage__content">
           {/* TODO: filter and sort by */}
           {/* TODO: all products */}
-          <div className="products">
+          {/* <div className="products">
             {products.length > 0 ? (
               products.map((product: any, index: number) => (
                 <div
@@ -120,8 +127,8 @@ export default function Category() {
             ) : (
               <Loading />
             )}
-          </div>
-
+          </div> */}
+          <Products products={products} />
           {/* STYLE: Load More button */}
           {products.length > 0 && (
             <div className="loadMore">

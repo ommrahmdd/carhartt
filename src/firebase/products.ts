@@ -159,11 +159,40 @@ export let getProductBySeasonAndYear = async (
     _id: product.id,
   }));
 };
-
+// HANDLE: filter products by sales (limit)
 export let getSalesProducts = async () => {
   let q = query(productCollection, where("discount", ">", "0"), limit(8));
   let snapShots = await getDocs(q);
   return snapShots.docs.map((product) => ({
+    ...product.data(),
+    _id: product.id,
+  }));
+};
+
+// HANDLE: filter products by sales
+export let getProductByDiscount = async (_id: string = "0") => {
+  let docRef = doc(db, "products", _id);
+  let lastDoc = await getDoc(docRef);
+  let q;
+  if (_id != "0") {
+    q = query(
+      productCollection,
+      where("discount", ">", "0"),
+      orderBy("discount"),
+      startAfter(lastDoc),
+      limit(PAGE_SIZE)
+    );
+  } else {
+    q = query(
+      productCollection,
+      where("discount", ">", "1"),
+      orderBy("discount"),
+      limit(PAGE_SIZE)
+    );
+  }
+
+  let snapShot = await getDocs(q);
+  return snapShot.docs.map((product) => ({
     ...product.data(),
     _id: product.id,
   }));
