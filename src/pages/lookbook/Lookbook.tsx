@@ -3,24 +3,39 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 import {
   getCurrentlookbook,
+  getlookBookProducts,
   getLookbookProducts,
 } from "../../firebase/lookbook";
 import { IProduct } from "../addProduct/IProduct.model";
 import { Ilookbook } from "./Ilookbook";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "react-lazy-load-image-component/src/effects/opacity.css";
+import { getProductById } from "../../firebase/products";
+import Loading from "../../components/loading/Loading";
 
 export default function Lookbook() {
-  let [products, setProducts] = useState<IProduct[]>();
+  let [products, setProducts] = useState<IProduct[]>([]);
+  let [lookbookProducts, setLookbookProducts] = useState<IProduct[]>([]);
   let [lookbook, setLookbook] = useState<Ilookbook>({
     year: "",
     season: "",
   });
   let navigate = useNavigate();
   useEffect(() => {
-    getLookbookProducts().then((data: any) => {
-      setProducts(data);
-      setLookbook({ year: data[0].year, season: data[0].season });
+    // getLookbookProducts().then((data: any) => {
+    //   setProducts(data);
+    //   setLookbook({ year: data[0].year, season: data[0].season });
+    // });
+    getlookBookProducts().then((_ids) => {
+      _ids.forEach((_id) => {
+        getProductById(_id).then((data: any) => {
+          setLookbook({
+            year: data.year,
+            season: data.season,
+          });
+          setProducts((prevState: any) => [...prevState, data]);
+        });
+      });
     });
   }, []);
 
@@ -63,7 +78,7 @@ export default function Lookbook() {
   };
   return (
     <main className="lookbook">
-      {products && (
+      {products.length > 0 ? (
         <div className="container">
           <div className="lookbook__content">
             {/* ---------------------------- START STYLE: Header */}
@@ -80,7 +95,7 @@ export default function Lookbook() {
               <div className="header__imgs">
                 <div className="header__imgs-imgBox lookbook-imgBox">
                   <LazyLoadImage
-                    src={products[1]?.images[0]}
+                    src={products[0]?.images[0]}
                     className="header__imgs-1 "
                     alt="product image"
                     effect="opacity"
@@ -88,7 +103,7 @@ export default function Lookbook() {
                   <div className="overlay">
                     <button
                       className="customBtn linkBtn"
-                      onClick={() => handleProductClick(products![1]._id!)}
+                      onClick={() => handleProductClick(products![0]._id!)}
                     >
                       View <span>&rsaquo;</span>
                     </button>
@@ -101,7 +116,7 @@ export default function Lookbook() {
                 </p>
                 <div className="header__imgs-imgBox lookbook-imgBox">
                   <LazyLoadImage
-                    src={products[3]?.images[0]}
+                    src={products[1]?.images[0]}
                     className="header__imgs-2 "
                     alt="product image"
                     effect="opacity"
@@ -109,7 +124,7 @@ export default function Lookbook() {
                   <div className="overlay">
                     <button
                       className="customBtn linkBtn"
-                      onClick={() => handleProductClick(products![3]._id!)}
+                      onClick={() => handleProductClick(products![1]._id!)}
                     >
                       View <span>&rsaquo;</span>
                     </button>
@@ -120,13 +135,13 @@ export default function Lookbook() {
             {/* ---------------------------- END STYLE Header */}
             {/* ---------------------------- START STYLE: Section 1 */}
             <section className="sectionOne">
-              {productImgHTML(4, "sectionOne__imgBox", "1")}
+              {productImgHTML(2, "sectionOne__imgBox", "1")}
             </section>
             {/* ---------------------------- END STYLE Section 1 */}
             {/* ---------------------------- START STYLE: Section 2 */}
             <section className="sectionTwo">
-              {productImgHTML(5, "sectionTwo__imgBox", "1")}
-              {productImgHTML(6, "sectionTwo__imgBox", "2")}
+              {productImgHTML(3, "sectionTwo__imgBox", "1")}
+              {productImgHTML(4, "sectionTwo__imgBox", "2")}
 
               <p className="sectionTwo__txt">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -137,15 +152,15 @@ export default function Lookbook() {
             {/* ---------------------------- END STYLE Section 2 */}
             {/* ---------------------------- START STYLE: Section 3 */}
             <section className="sectionThree">
-              {productImgHTML(7, "sectionThree__imgBox", "1")}
-              {productImgHTML(8, "sectionThree__imgBox", "2")}
+              {productImgHTML(5, "sectionThree__imgBox", "1")}
+              {productImgHTML(6, "sectionThree__imgBox", "2")}
             </section>
             {/* ---------------------------- END STYLE Section 3 */}
             {/* ---------------------------- START STYLE: Section 4 */}
             <section className="sectionFour">
-              {productImgHTML(9, "sectionFour__imgBox", "1")}
-              {productImgHTML(9, "sectionFour__imgBox", "2")}
-              {productImgHTML(8, "sectionFour__imgBox", "3")}
+              {productImgHTML(7, "sectionFour__imgBox", "1")}
+              {productImgHTML(8, "sectionFour__imgBox", "2")}
+              {productImgHTML(9, "sectionFour__imgBox", "3")}
             </section>
             {/* ---------------------------- END STYLE Section 4 */}
             {/* ---------------------------- START STYLE: Section 5 */}
@@ -169,6 +184,8 @@ export default function Lookbook() {
             {/* ---------------------------- END STYLE Section 5 */}
           </div>
         </div>
+      ) : (
+        <Loading />
       )}
     </main>
   );

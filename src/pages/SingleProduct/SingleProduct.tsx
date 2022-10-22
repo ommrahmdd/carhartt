@@ -6,6 +6,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import logo from "./../../assets/logo.png";
 import { currencyFormat } from "../../components/formatMoney";
 import Title from "../../components/Title";
+import Loading from "../../components/loading/Loading";
 export default function SingleProduct() {
   let params = useParams();
   let navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function SingleProduct() {
               ))}
           </div>
           <div className="singleProduct__content-right">
-            {product && (
+            {product ? (
               <div className="product">
                 <span className="product__code">Code {product.code}</span>
                 <h4 className="product__name">{product.name}</h4>
@@ -117,6 +118,8 @@ export default function SingleProduct() {
                   <p>{product.returns}</p>
                 </details>
               </div>
+            ) : (
+              <Loading />
             )}
           </div>
         </div>

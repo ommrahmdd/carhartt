@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { currencyFormat } from "../formatMoney";
 import Loading from "../loading/Loading";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-export default function Products({ products }: any) {
+export default function Products({
+  products,
+  handleAddProductToLookBook,
+  activeLookBook,
+}: any) {
   let navigate = useNavigate();
   let handleProductClick = (_id: string) => {
     navigate(`/category/product/${_id}`);
@@ -15,9 +19,19 @@ export default function Products({ products }: any) {
       {products.length > 0 ? (
         products.map((product: any, index: number) => (
           <div
-            className="products__product"
+            className={`products__product ${
+              activeLookBook && activeLookBook.indexOf(product._id) != -1
+                ? "opacity"
+                : ""
+            }`}
             key={product._id}
-            onClick={() => handleProductClick(product._id)}
+            onClick={() => {
+              if (handleAddProductToLookBook) {
+                handleAddProductToLookBook(product._id);
+              } else {
+                handleProductClick(product._id);
+              }
+            }}
           >
             {Number(product.discount) > 0 ? (
               <div className="products__product-discount">

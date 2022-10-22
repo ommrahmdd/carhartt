@@ -41,6 +41,26 @@
   }
 }
 
+.loadBtn {
+  padding: 0.8rem 2rem;
+  font-size: 1.3rem !important;
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+  color: black;
+  border: 0.1rem solid black;
+  animation: moveTopDown 1.9s linear infinite;
+  span {
+    display: flex;
+    align-items: center;
+    display: inline-block;
+    font-size: 1.3rem !important;
+    margin-right: 1rem;
+    transform: rotate(90deg);
+  }
+  &:hover {
+    animation: none;
+  }
+}
 @media screen and (min-width: 1024px) {
   .linkBtn {
     font-size: 3rem;

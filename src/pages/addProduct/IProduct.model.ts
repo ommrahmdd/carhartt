@@ -12,5 +12,7 @@ export interface IProduct {
   description: string;
   shipping: string;
   returns: string;
+  year: string;
+  season: string;
   _id?: string;
 }

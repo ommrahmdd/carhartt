@@ -5,11 +5,14 @@ import {
   updateDoc,
   where,
   doc,
+  addDoc,
 } from "firebase/firestore";
 import { db } from "./congif";
+import { getProductById } from "./products";
 
 let lookbookCollection = collection(db, "lookbook");
 let productsCollection = collection(db, "products");
+let lookbookProdctsCollection = collection(db, "lookbookProducts");
 
 export let getCurrentlookbook = async () => {
   let snapShot = await getDocs(lookbookCollection);
@@ -43,4 +46,23 @@ export let updateYearAndSeason = async (year: string, season: string) => {
     year,
     season,
   });
+};
+
+export let addlookbookProducts = async (_ids: string[]) => {
+  let result = await _ids.map(async (_id) => {
+    await addDoc(lookbookProdctsCollection, { _id });
+  });
+
+  return result;
+};
+
+export let getlookBookProducts = async () => {
+  let _ids = await getDocs(lookbookProdctsCollection);
+  let products: string[] = [];
+  _ids.docs.forEach((id) => {
+    if (id.data()._id) {
+      products.push(id.data()._id);
+    }
+  });
+  return products;
 };

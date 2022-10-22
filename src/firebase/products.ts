@@ -131,7 +131,6 @@ export let getProductBySeasonAndYear = async (
   year: string,
   last_product_id: string = "0"
 ) => {
-  console.log(last_product_id);
   let lastProductRef = doc(db, "products", last_product_id);
   let lastProductSnapShot = await getDoc(lastProductRef);
   let q;

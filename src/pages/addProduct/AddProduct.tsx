@@ -5,7 +5,7 @@ import { storage } from "../../firebase/congif";
 import { getAllCategory } from "../../firebase/homeUi";
 import { addProduct, addProductImgs } from "../../firebase/products";
 import { IProduct } from "./IProduct.model";
-
+import { seasons, years } from "./../editLookbook/utils";
 export default function AddProduct() {
   let [product, setProduct] = useState<IProduct>({
     code: "",
@@ -21,6 +21,8 @@ export default function AddProduct() {
     description: "",
     shipping: "",
     returns: "",
+    year: "",
+    season: "",
   });
   let [categories, setCategories] = useState<any>();
   let sizes = ["xs", "s", "m", "l", "xl"];
@@ -54,6 +56,7 @@ export default function AddProduct() {
       }));
     }
   };
+
   // HANDLE: colors
   let handleAddColor = () => {
     setProduct((prevState) => ({
@@ -121,11 +124,15 @@ export default function AddProduct() {
     });
   };
   return (
-    <div className="addProduct">
+    <main className="addProduct">
       <div className="container">
-        <div className="addProduct__content">
+        <header>
+          <h4>Add Product</h4>
+        </header>
+        <div className="line"></div>
+        <section className="addProduct__content">
           <form action="" onSubmit={(e) => handleSubmit(e)}>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="code">Code</label>
               <input
                 type="text"
@@ -135,7 +142,7 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="name">Name</label>
               <input
                 type="text"
@@ -145,7 +152,7 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="price">Price</label>
               <input
                 type="number"
@@ -156,7 +163,7 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="quantity">Quantity</label>
               <input
                 type="number"
@@ -167,7 +174,7 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="type">Type</label>
               <select
                 name="type"
@@ -182,7 +189,7 @@ export default function AddProduct() {
                 ))}
               </select>
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="category">Category</label>
               <select
                 name="category"
@@ -192,13 +199,13 @@ export default function AddProduct() {
               >
                 {categories &&
                   categories.map((category: any, index: number) => (
-                    <option value={category.data.name}>
+                    <option value={category.data.name} key={index}>
                       {category.data.name}
                     </option>
                   ))}
               </select>
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="discount">Discount</label>
               <input
                 type="number"
@@ -209,7 +216,29 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            {/* STYLE: years */}
+            <div className="mb-4 addProduct__content-box">
+              <label htmlFor="year">Year</label>
+              <select name="year" onChange={(e) => handleTextChange(e)}>
+                {years.map((year, index) => (
+                  <option value={year} key={index}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* STYLE: season */}
+            <div className="mb-4 addProduct__content-box">
+              <label>Season</label>
+              <select name="season" onChange={(e) => handleTextChange(e)}>
+                {seasons.map((season, index) => (
+                  <option value={season} key={index}>
+                    {season}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="description">Description</label>
               <textarea
                 id="description"
@@ -220,7 +249,7 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="shipping">Shipping</label>
               <textarea
                 id="shipping"
@@ -231,7 +260,7 @@ export default function AddProduct() {
                 onChange={(e) => handleTextChange(e)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 addProduct__content-box">
               <label htmlFor="returns">Returns</label>
               <textarea
                 id="returns"
@@ -243,7 +272,7 @@ export default function AddProduct() {
               />
             </div>
             {/* STYLE: sizes */}
-            <div className="mb-4 sizes">
+            <div className="mb-4 addProduct__content-box sizes">
               <label htmlFor="">Sizes</label>
               {sizes.map((size, index) => (
                 <div
@@ -268,10 +297,10 @@ export default function AddProduct() {
               ))}
             </div>
             {/* STYLE: Colors */}
-            <div className="mb-4 colors">
+            <div className="mb-4 addProduct__content-box colors">
               <label htmlFor="">Colors</label>
               {product.colors.map((color, index) => (
-                <div className="">
+                <div className="" key={index}>
                   <input
                     type="color"
                     key={index}
@@ -296,7 +325,7 @@ export default function AddProduct() {
               </button>
             </div>
             {/* STYLE: images */}
-            <div className="mb-4 images">
+            <div className="mb-4 addProduct__content-box images">
               <label htmlFor="">Images</label>
               {product.images.map((img, key) => (
                 <div className="images__imgBox" key={key}>
@@ -326,8 +355,8 @@ export default function AddProduct() {
               Add Product
             </button>
           </form>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

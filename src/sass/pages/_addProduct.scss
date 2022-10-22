@@ -2,7 +2,20 @@
   padding: 3rem 0;
 
   &__content {
+    &-box {
+      width: 30rem;
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+      }
+    }
     form {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 3rem;
       label {
         display: block;
         width: 5rem;
@@ -13,7 +26,11 @@
         padding: 0.5rem 1rem;
         font-size: 1.4rem;
       }
-
+      select {
+        padding: 1rem;
+        text-transform: capitalize;
+        font-size: 1.6rem;
+      }
       .sizes {
         width: 25rem;
         display: flex;
@@ -41,6 +58,7 @@
         }
       }
       .colors {
+        width: 100%;
         div {
           display: flex;
           align-items: center;
@@ -72,6 +90,7 @@
     }
   }
 }
+
 .activeSize {
   opacity: 1 !important;
 }

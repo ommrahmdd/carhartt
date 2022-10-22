@@ -12,6 +12,7 @@ import { currencyFormat } from "../../components/formatMoney";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Loading from "../../components/loading/Loading";
 import Products from "../../components/products/Products";
+import LoadMoreButton from "../../components/loadMoreButton/LoadMoreButton";
 export default function Category() {
   let location = useLocation();
   let navigate = useNavigate();
@@ -130,18 +131,12 @@ export default function Category() {
           </div> */}
           <Products products={products} />
           {/* STYLE: Load More button */}
-          {products.length > 0 && (
-            <div className="loadMore">
-              {IS_FINISHED == false && (
-                <button
-                  className="customBtn primaryBtn"
-                  onClick={() => handleLoadMoreBtn(products.at(-1)._id)}
-                >
-                  <span>&rsaquo;</span> Load More
-                </button>
-              )}
-            </div>
-          )}
+
+          <LoadMoreButton
+            products={products}
+            handleLoadMoreBtn={handleLoadMoreBtn}
+            IS_FINISHED={IS_FINISHED}
+          />
         </div>
       </div>
     </div>

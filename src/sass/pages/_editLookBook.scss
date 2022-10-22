@@ -26,5 +26,19 @@
         align-self: flex-end;
       }
     }
+    &-updateimgs {
+      .lookBookInfo {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 5rem;
+        h6 {
+          width: 30rem;
+          text-transform: capitalize;
+          margin-bottom: 2rem;
+        }
+      }
+    }
   }
 }
