@@ -1,4 +1,11 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+  doc,
+} from "firebase/firestore";
 import { db } from "./congif";
 
 let lookbookCollection = collection(db, "lookbook");
@@ -25,4 +32,15 @@ export let getLookbookProducts = async () => {
     };
   });
   return products;
+};
+
+export let updateYearAndSeason = async (year: string, season: string) => {
+  let snapShot = await getDocs(lookbookCollection);
+  let docId = snapShot.docs[0].id;
+
+  let docRef = doc(db, "lookbook", docId);
+  await updateDoc(docRef, {
+    year,
+    season,
+  });
 };

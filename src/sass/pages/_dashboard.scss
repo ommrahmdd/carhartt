@@ -21,7 +21,7 @@
   }
   &__sidebar {
     position: fixed;
-    left: 0;
+    left: -10%;
     top: 0;
     background-color: white;
     height: 100vh;
@@ -36,6 +36,7 @@
       &__element {
         margin-bottom: 1rem;
         opacity: 0;
+        // display: none;
         &-link {
           color: black;
           text-transform: capitalize;

@@ -31,7 +31,7 @@ export default function DashboardSidebar() {
       <div className="dashboard__sidebar" onClick={closeSidebar}>
         <ul className="sideElements">
           {dashboard_element.map((element, index) => (
-            <li className="sideElements__element">
+            <li className="sideElements__element" key={index}>
               <Link
                 to={`/dashboard${element.to}`}
                 className="linkBtn sideElements__element-link"
