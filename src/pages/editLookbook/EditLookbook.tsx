@@ -3,7 +3,9 @@ import LoadMoreButton from "../../components/loadMoreButton/LoadMoreButton";
 import Products from "../../components/products/Products";
 import {
   addlookbookProducts,
+  deleteLookBookProduct,
   getCurrentlookbook,
+  getlookBookProducts,
   updateYearAndSeason,
 } from "../../firebase/lookbook";
 import { getProductBySeasonAndYear } from "../../firebase/products";
@@ -20,8 +22,8 @@ export default function EditLookbook() {
   });
   let [products, setProducts] = useState<any>([]);
   let [IS_FINISHED, setFINISHED] = useState<boolean>(false);
-  let [counter, setCounter] = useState<number>(0);
-  let [newProducts, setNewProducts] = useState<string[]>([]);
+  let [newProducts_IDs, setNewProducts_IDs] = useState<string[]>([]);
+  let [lookbookProducts, setLookbookProducts] = useState<any>([]);
   useEffect(() => {
     getCurrentlookbook()
       .then((data) => {
@@ -34,6 +36,9 @@ export default function EditLookbook() {
       .then((snapShot) => {
         setProducts(snapShot);
       });
+    getlookBookProducts().then((snapShot) => {
+      setLookbookProducts(snapShot);
+    });
   }, []);
 
   let handleYearAndSeason = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -67,17 +72,24 @@ export default function EditLookbook() {
   };
 
   let handleAddProductToLookBook = (_id: string) => {
-    if (newProducts.length <= 10) {
-      if (newProducts.indexOf(_id) != -1) {
-        // setCounter(counter - 1);
-        setNewProducts((prevState) => {
+    if (newProducts_IDs.length <= 10) {
+      if (newProducts_IDs.indexOf(_id) != -1) {
+        setNewProducts_IDs((prevState) => {
           return prevState.filter((product) => product != _id);
         });
       } else {
-        // setCounter(counter + 1);
-        setNewProducts((prevState) => [...prevState, _id]);
+        setNewProducts_IDs((prevState) => [...prevState, _id]);
       }
     }
+  };
+  let handleDeleteProductsFromLookBook = () => {
+    getlookBookProducts().then((data) => {
+      data.forEach((_id) => {
+        deleteLookBookProduct(_id).then((data) => {
+          console.log(data, "delted");
+        });
+      });
+    });
   };
   return (
     <main className="editLookBook">
@@ -134,19 +146,22 @@ export default function EditLookbook() {
                 If you want to update lookbook images, You should delete all
                 images first
               </h6>
-              <button className="customBtn primaryBtn">
+              <button
+                className="customBtn primaryBtn"
+                onClick={() => handleDeleteProductsFromLookBook()}
+              >
                 Delete All Images
               </button>
             </div>
 
-            {products.length == 0 ? (
+            {lookbookProducts.length == 0 ? (
               <>
                 <div className="lookBookInfo">
                   <h6>After Select images, Click on Add Images Button</h6>
                   <button
                     className="customBtn primaryBtn"
                     onClick={() =>
-                      addlookbookProducts(newProducts).then((data) => {
+                      addlookbookProducts(newProducts_IDs).then((data) => {
                         console.log(data);
                       })
                     }
@@ -157,7 +172,7 @@ export default function EditLookbook() {
                 <Products
                   products={products}
                   handleAddProductToLookBook={handleAddProductToLookBook}
-                  activeLookBook={newProducts}
+                  activeLookBook={newProducts_IDs}
                 />
                 <LoadMoreButton
                   IS_FINISHED={IS_FINISHED}
