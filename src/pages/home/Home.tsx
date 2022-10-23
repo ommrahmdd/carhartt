@@ -31,10 +31,11 @@ export default function Home() {
 
   useEffect(() => {
     getAllCategory().then((data: any) => {
+      console.log(data);
+
       setCategories(data);
     });
     getSalesProducts().then((data) => {
-      console.log(data);
       setSalesProducts(data);
     });
   }, []);
@@ -91,7 +92,7 @@ export default function Home() {
                     <div className="center__left">
                       <p>{cat.data.text}</p>
                       <Link
-                        to={`/${cat.data.path}`}
+                        to={`/category?category=${cat.data.name}`}
                         className="center__left-link"
                       >
                         See More{" "}
@@ -112,13 +113,13 @@ export default function Home() {
         <section className="menKids">
           <div className="menKids__men">
             <img src={men} alt="men photo" />
-            <Link to="/" className="menKids__men-link">
+            <Link to="/category?type=men" className="menKids__men-link">
               Mens <i className="fa-solid fa-arrow-right"></i>
             </Link>
           </div>
           <div className="menKids__kids">
             <img src={kids} alt="kids photo" />
-            <Link to="/" className="menKids__men-link">
+            <Link to="/category?type=kids" className="menKids__men-link">
               Kids <i className="fa-solid fa-arrow-right"></i>
             </Link>
           </div>

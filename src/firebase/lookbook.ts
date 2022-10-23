@@ -74,13 +74,3 @@ export let deleteLookBookProduct = async (_id: string) => {
   let docs = await getDocs(q);
   await deleteDoc(docs.docs[0].ref);
 };
-// export let deleteLookBookProducts = async (_ids: string[]) => {
-//   // let snapShot = await getDocs(lookbookProdctsCollection);
-//   // snapShot.docs.forEach((d) => {});
-//   _ids.forEach(async (id: string) => {
-//     let q = query(lookbookProdctsCollection, where("_id", "==", id));
-//     let docs = await getDocs(q);
-//     console.log(docs);
-//     await deleteDoc(docs.docs[0].ref);
-//   });
-// };

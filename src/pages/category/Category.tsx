@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import {
   getAllProducts,
+  getProductByCategory,
   getProductByDiscount,
   getProductBySeasonAndYear,
   getProductByType,
@@ -21,7 +22,7 @@ export default function Category() {
   let querySerach = new URLSearchParams(location.search);
 
   useEffect(() => {
-    if (querySerach.get("category")) {
+    if (querySerach.get("category") && querySerach.get("category") == "all") {
       getAllProducts().then((data) => {
         setProducts(data);
       });
@@ -40,6 +41,14 @@ export default function Category() {
       getProductByDiscount().then((data) => {
         setProducts(data);
       });
+    } else if (
+      querySerach.get("category") &&
+      querySerach.get("category") != "all"
+    ) {
+      getProductByCategory(querySerach.get("category")!).then((data) => {
+        if (data.length == 0) setFINISHED(true);
+        else setProducts((prevState: any) => [...prevState, ...data]);
+      });
     }
 
     setFINISHED(false);
@@ -52,7 +61,7 @@ export default function Category() {
 
   // HANDLE: Load more button
   let handleLoadMoreBtn = (lastProduct: string) => {
-    if (querySerach.get("category")) {
+    if (querySerach.get("category") && querySerach.get("category") == "all") {
       getAllProducts(lastProduct).then((data) => {
         if (data.length == 0) setFINISHED(true);
         else setProducts((prevState: any) => [...prevState, ...data]);
@@ -76,6 +85,16 @@ export default function Category() {
         if (data.length == 0) setFINISHED(true);
         else setProducts((prevState: any) => [...prevState, ...data]);
       });
+    } else if (
+      querySerach.get("category") &&
+      querySerach.get("category") != "all"
+    ) {
+      getProductByCategory(querySerach.get("category")!, lastProduct).then(
+        (data) => {
+          if (data.length == 0) setFINISHED(true);
+          else setProducts((prevState: any) => [...prevState, ...data]);
+        }
+      );
     }
   };
 

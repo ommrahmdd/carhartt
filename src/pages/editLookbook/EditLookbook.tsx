@@ -53,7 +53,8 @@ export default function EditLookbook() {
       currentYearAndSeason.year,
       currentYearAndSeason.season
     ).then(() => {
-      window.location.reload();
+      console.log("first");
+      // window.location.reload();
     });
   };
 
@@ -85,9 +86,7 @@ export default function EditLookbook() {
   let handleDeleteProductsFromLookBook = () => {
     getlookBookProducts().then((data) => {
       data.forEach((_id) => {
-        deleteLookBookProduct(_id).then((data) => {
-          console.log(data, "delted");
-        });
+        deleteLookBookProduct(_id);
       });
     });
   };

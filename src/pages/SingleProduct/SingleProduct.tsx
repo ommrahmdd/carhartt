@@ -17,11 +17,11 @@ export default function SingleProduct() {
     getProductById(params.prodID!)
       .then((data: any) => {
         setProduct(data);
-        return getProductByCategory(data.category, 4);
+        return getProductByCategory(data.category);
       })
       .then((res: any) => {
         console.log(res);
-        setSuggest(res);
+        setSuggest(res.slice(0, 4));
       });
   }, [params]);
   return (

@@ -81,14 +81,36 @@ export let getProductById = async (id: string) => {
 };
 
 // HANDLE: filter products by category
-export let getProductByCategory = async (category: string, _slice: number) => {
-  let q = query(productCollection, where("category", "==", category));
+export let getProductByCategory = async (
+  category: string,
+  lastProductId: string = "0"
+) => {
+  let lastProduct_doc = doc(db, "products", lastProductId);
+  let lastProduct = await getDoc(lastProduct_doc);
+
+  let q;
+  if (lastProductId != "0") {
+    q = query(
+      productCollection,
+      where("category", "==", category),
+      orderBy("name"),
+      startAfter(lastProduct),
+      limit(PAGE_SIZE)
+    );
+  } else {
+    q = query(
+      productCollection,
+      where("category", "==", category),
+      orderBy("name"),
+      limit(PAGE_SIZE)
+    );
+  }
   let querySnapshot = await getDocs(q);
   let products = querySnapshot.docs.map((product) => ({
     ...product.data(),
     _id: product.id,
   }));
-  return products.slice(0, _slice);
+  return products;
 };
 
 // HANDLE: filter products by type

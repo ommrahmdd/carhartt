@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import {
   getCurrentlookbook,
   getlookBookProducts,
-  getLookbookProducts,
 } from "../../firebase/lookbook";
 import { IProduct } from "../addProduct/IProduct.model";
 import { Ilookbook } from "./Ilookbook";
@@ -29,12 +28,14 @@ export default function Lookbook() {
     getlookBookProducts().then((_ids) => {
       _ids.forEach((_id) => {
         getProductById(_id).then((data: any) => {
-          setLookbook({
-            year: data.year,
-            season: data.season,
-          });
           setProducts((prevState: any) => [...prevState, data]);
         });
+      });
+    });
+    getCurrentlookbook().then((data) => {
+      setLookbook({
+        year: data.year,
+        season: data.season,
       });
     });
   }, []);
