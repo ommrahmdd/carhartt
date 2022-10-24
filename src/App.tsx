@@ -5,6 +5,7 @@ import Nav from "./components/nav/Nav";
 import Loading from "./components/loading/Loading";
 const Home = lazy(() => import("./pages/home/Home"));
 const About = lazy(() => import("./pages/about/About"));
+const NotFound = lazy(() => import("./pages/notFound/NotFound"));
 const HomeUI = lazy(() => import("./pages/HomeUI/HomeUI"));
 const SingleCategory = lazy(
   () => import("./pages/SingleCategory/SingleCategory")
@@ -17,6 +18,7 @@ const DashboardSidebar = lazy(
   () => import("./components/dashboardSidebar/DashboardSidebar")
 );
 const EditLookbook = lazy(() => import("./pages/editLookbook/EditLookbook"));
+const Cart = lazy(() => import("./pages/cart/Cart"));
 
 // HINT:
 // /home-ui for modify the home content like header and category
@@ -42,7 +44,8 @@ function App() {
             <Route path="editLookbook" element={<EditLookbook />} />
           </Route>
           <Route path="/lookbook" element={<Lookbook />} />
-          <Route path="*" element={<div>Error</div>} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </Suspense>

@@ -7,23 +7,32 @@ import logo from "./../../assets/logo.png";
 import { currencyFormat } from "../../components/formatMoney";
 import Title from "../../components/Title";
 import Loading from "../../components/loading/Loading";
+import {
+  addProductToCart,
+  checkProductInCart,
+  removeProductFromCart,
+} from "./_utils";
 export default function SingleProduct() {
   let params = useParams();
   let navigate = useNavigate();
   let [product, setProduct] = useState<any>();
   let [suggest, setSuggest] = useState<any>();
+  let [productInCart, setProductInCart] = useState<boolean>(false);
 
   useEffect(() => {
     getProductById(params.prodID!)
       .then((data: any) => {
+        if (checkProductInCart(data._id)) {
+          setProductInCart(true);
+        }
         setProduct(data);
         return getProductByCategory(data.category);
       })
       .then((res: any) => {
-        console.log(res);
         setSuggest(res.slice(0, 4));
       });
   }, [params]);
+
   return (
     <div className="singleProduct">
       <div className="container">
@@ -90,9 +99,30 @@ export default function SingleProduct() {
                   </div>
                 </div>
                 <div className="line"></div>
-                <button className="customBtn primaryBtn w-100 my-3">
-                  Add To Bag
-                </button>
+                {productInCart ? (
+                  <button
+                    className="customBtn primaryBtn bg-danger w-100 my-3"
+                    onClick={() => {
+                      removeProductFromCart(product._id);
+                      setProductInCart(false);
+                      window.location.reload();
+                    }}
+                  >
+                    Remove From Bag
+                  </button>
+                ) : (
+                  <button
+                    className="customBtn primaryBtn w-100 my-3"
+                    onClick={() => {
+                      addProductToCart(product._id);
+                      setProductInCart(true);
+                      window.location.reload();
+                    }}
+                  >
+                    Add To Bag
+                  </button>
+                )}
+
                 <div className="line"></div>
                 <details className="product__details">
                   <summary className="product__details-summary">

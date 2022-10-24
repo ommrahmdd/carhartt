@@ -38,6 +38,7 @@
         &__beforeDiscount {
           font-style: italic;
           text-decoration: line-through;
+          opacity: 0.8;
         }
         &__colors {
           p {
@@ -68,7 +69,9 @@
             }
           }
         }
-
+        .removeBtn {
+          filter: (grayscale(1));
+        }
         &__details {
           appearance: none;
           &-summary {
@@ -80,19 +83,33 @@
             text-transform: uppercase;
             i {
               font-size: 2rem;
+              transition: all 0.2s ease-in-out;
+            }
+
+            .fa-minus {
+              display: none;
+              opacity: 0;
+              transition: all 0.2s ease-in-out;
             }
           }
           p {
             font-size: 1.5rem;
             padding: 2rem !important;
             font-weight: 300;
+            background-color: $greyColor;
+            margin-top: 2rem !important;
           }
+        }
+        details[open] .fa-plus {
+          transform: rotate(45deg);
+          opacity: 0.5;
         }
       }
     }
   }
 }
-
+// --------------------------------------------
+// STYLE: suggest
 .singleProduct {
   &__suggest {
     margin: 3rem 0;

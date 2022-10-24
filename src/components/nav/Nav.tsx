@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "./../../assets/logo.png";
+import { IMenu } from "./INav.model";
 import { handleCloseMenu, handleOpenMenu } from "./navUtils";
 export default function Nav() {
   let navigate = useNavigate();
-  // let all: string[] = ["men", "Kids", "lookbook", "Bag"];
-  let all: any[] = [
+
+  let all: IMenu[] = [
     {
       route: "Men",
       to: "/category?type=men",
@@ -20,7 +21,7 @@ export default function Nav() {
     },
     {
       route: "Bag",
-      to: "/bag",
+      to: "/cart",
     },
   ];
   let left: string[] = ["men", "Kids", "lookbook"];
@@ -83,8 +84,16 @@ export default function Nav() {
                 </Link>
               </li>
               <li>
-                <Link to="/" className="customNav__right-link">
-                  Bag (0)
+                <Link to="/cart" className="customNav__right-link">
+                  Bag{" "}
+                  <span>
+                    {localStorage.getItem("carhartt-cart")
+                      ? `(${
+                          JSON.parse(localStorage.getItem("carhartt-cart")!)
+                            .length
+                        })`
+                      : `(0)`}
+                  </span>
                 </Link>
               </li>
             </ul>

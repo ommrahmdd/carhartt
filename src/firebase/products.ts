@@ -87,7 +87,7 @@ export let getProductByCategory = async (
 ) => {
   let lastProduct_doc = doc(db, "products", lastProductId);
   let lastProduct = await getDoc(lastProduct_doc);
-
+  console.log(category);
   let q;
   if (lastProductId != "0") {
     q = query(
