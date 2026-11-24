@@ -1,10 +1,8 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState, useEffect } from "react";
-import { v4 } from "uuid";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { storage } from "../../firebase/congif";
+import { uploadImage } from "../../cloudinary";
 import {
   addCategory,
   deleteHeaderImg,
@@ -47,12 +45,7 @@ export default function HomeUI() {
   };
   let submitHeaderImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let imgName = `${headerImg?.name}${v4()}`;
-    let imgRef = ref(storage, `header/${imgName}`);
-    uploadBytes(imgRef, headerImg!)
-      .then((res) => {
-        return getDownloadURL(res.ref);
-      })
+    uploadImage(headerImg!)
       .then((url) => {
         return updateHeader(url);
       })
@@ -92,12 +85,7 @@ export default function HomeUI() {
     }).then((_id: string) => {
       let imgs = [category.img1, category.img2];
       imgs.forEach((img, index) => {
-        let imgName = `${img.name}${v4()}`;
-        let imgRef = ref(storage, `category/${imgName}`);
-        uploadBytes(imgRef, img)
-          .then((res) => {
-            return getDownloadURL(res.ref);
-          })
+        uploadImage(img as any)
           .then((url) => {
             return updateCategory(_id, `img${index + 1}`, url);
           })
