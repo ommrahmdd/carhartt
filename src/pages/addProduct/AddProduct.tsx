@@ -1,7 +1,5 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from "react";
-import { v4 } from "uuid";
-import { storage } from "../../firebase/congif";
+import { uploadImage } from "../../cloudinary";
 import { getAllCategory } from "../../firebase/homeUi";
 import { addProduct, addProductImgs } from "../../firebase/products";
 import { IProduct } from "./IProduct.model";
@@ -108,12 +106,7 @@ export default function AddProduct() {
     e.preventDefault();
     addProduct(product).then((_id) => {
       product.images.forEach((img) => {
-        let imgName = `${img.name}${v4()}`;
-        let imgRef = ref(storage, `product/${_id}/${imgName}`);
-        uploadBytes(imgRef, img)
-          .then((res) => {
-            return getDownloadURL(res.ref);
-          })
+        uploadImage(img as any)
           .then((url) => {
             return addProductImgs(_id, url);
           })

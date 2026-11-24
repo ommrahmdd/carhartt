@@ -1,8 +1,6 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
-import { v4 } from "uuid";
-import { storage } from "../../firebase/congif";
+import { uploadImage } from "../../cloudinary";
 import {
   deleteCategory,
   deleteCategoryImg,
@@ -65,12 +63,7 @@ export default function SingleCategory() {
   };
 
   let handleAddNewImg = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let imgName = `${(e.target as any).files[0].name}${v4()}`;
-    let imgRef = ref(storage, `category/${imgName}`);
-    uploadBytes(imgRef, (e.target as any).files[0])
-      .then((res) => {
-        return getDownloadURL(res.ref);
-      })
+    uploadImage((e.target as any).files[0])
       .then((url) => {
         if (category.img1) {
           return updateCategoryImg("img2", url, catID);
